@@ -1,0 +1,102 @@
+{
+  "version": 3,
+  "targets": {
+    "net7.0": {
+      "Quickenshtein/1.5.1": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.0/Quickenshtein.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/Quickenshtein.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Quickenshtein/1.5.1": {
+      "sha512": "orca+eUrt8FSF/mrgxFA2XNyXdp+2N/7+lwxD/cJEub6D/4VfpBMUkZrvP3WubKz3ToyDO0HV3sYbQql3xL7Nw==",
+      "type": "package",
+      "path": "quickenshtein/1.5.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "lib/netcoreapp3.0/Quickenshtein.dll",
+        "lib/netstandard2.0/Quickenshtein.dll",
+        "quickenshtein.1.5.1.nupkg.sha512",
+        "quickenshtein.nuspec",
+        "readme.md"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net7.0": [
+      "Quickenshtein >= 1.5.1"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\User\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "E:\\University\\Internship\\Name Match\\Program\\NameMatch\\NameMatch\\NameMatch.csproj",
+      "projectName": "NameMatch",
+      "projectPath": "E:\\University\\Internship\\Name Match\\Program\\NameMatch\\NameMatch\\NameMatch.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "E:\\University\\Internship\\Name Match\\Program\\NameMatch\\NameMatch\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net7.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net7.0": {
+        "targetAlias": "net7.0",
+        "dependencies": {
+          "Quickenshtein": {
+            "target": "Package",
+            "version": "[1.5.1, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

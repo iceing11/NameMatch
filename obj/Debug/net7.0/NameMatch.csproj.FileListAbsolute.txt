@@ -1,0 +1,17 @@
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\bin\Debug\net7.0\NameMatch.exe
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\bin\Debug\net7.0\NameMatch.deps.json
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\bin\Debug\net7.0\NameMatch.runtimeconfig.json
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\bin\Debug\net7.0\NameMatch.dll
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\bin\Debug\net7.0\NameMatch.pdb
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\bin\Debug\net7.0\Quickenshtein.dll
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\obj\Debug\net7.0\NameMatch.csproj.AssemblyReference.cache
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\obj\Debug\net7.0\NameMatch.GeneratedMSBuildEditorConfig.editorconfig
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\obj\Debug\net7.0\NameMatch.AssemblyInfoInputs.cache
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\obj\Debug\net7.0\NameMatch.AssemblyInfo.cs
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\obj\Debug\net7.0\NameMatch.csproj.CoreCompileInputs.cache
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\obj\Debug\net7.0\NameMatch.csproj.CopyComplete
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\obj\Debug\net7.0\NameMatch.dll
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\obj\Debug\net7.0\refint\NameMatch.dll
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\obj\Debug\net7.0\NameMatch.pdb
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\obj\Debug\net7.0\NameMatch.genruntimeconfig.cache
+E:\University\Internship\Name Match\Program\NameMatch\NameMatch\obj\Debug\net7.0\ref\NameMatch.dll
