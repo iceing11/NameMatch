@@ -11,4 +11,9 @@ public class LevenshteinComparator : IComparator
 
         return (double)(maxLength - distance) / maxLength;
     }
+    
+    public string GetName()
+    {
+        return "Quickenshtein Distance";
+    }
 }

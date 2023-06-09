@@ -6,7 +6,8 @@ public class NameGenerator
     private List<string> lastNames = new List<string>();
     private List<string> affixes3 = new List<string>();
     private List<string> affixes4 = new List<string>();
-    private List<string> affixes5 = new List<string>();
+    private List<string> shortFirstNames = new List<string>();
+    private List<string> shortLastNames = new List<string>();
 
     private List<string> names = new List<string>();
 
@@ -16,7 +17,16 @@ public class NameGenerator
         {
             while (!reader.EndOfStream)
             {
-                firstNames.Add(reader.ReadLine());
+                var line = reader.ReadLine();
+                if (line != null)
+                {
+                    firstNames.Add(line);
+
+                    if (line.Length <= 6)
+                    {
+                        shortFirstNames.Add(line);
+                    }
+                }
             }
         }
         
@@ -24,7 +34,16 @@ public class NameGenerator
         {
             while (!reader.EndOfStream)
             {
-                lastNames.Add(reader.ReadLine());
+                var line = reader.ReadLine();
+                if (line != null)
+                {
+                    lastNames.Add(line);
+                    
+                    if (line.Length <= 8)
+                    {
+                        shortLastNames.Add(line);
+                    }
+                }
             }
         }
         
@@ -44,14 +63,6 @@ public class NameGenerator
             }
         }
 
-        foreach (var n in firstNames.Concat(lastNames))
-        {
-            if (n.Length <= 5)
-            {
-                affixes5.Add(n);
-            }
-        }
-
         List<string> prefixedFirstNames = new List<string>();
         List<string> prefixedLastNames = new List<string>();
         List<string> suffixedFirstNames = new List<string>();
@@ -59,25 +70,25 @@ public class NameGenerator
         
         for (int i = 0; i < 16000; i++)
         {
-            var prefixedFirstName = affixes4.OrderBy(s => Guid.NewGuid()).First() + firstNames.OrderBy(s => Guid.NewGuid()).First();
+            var prefixedFirstName = affixes4.OrderBy(s => Guid.NewGuid()).First() + shortFirstNames.OrderBy(s => Guid.NewGuid()).First();
             prefixedFirstNames.Add(prefixedFirstName);
         }
         
         for (int i = 0; i < 16000; i++)
         {
-            var suffixedFirstName = firstNames.OrderBy(s => Guid.NewGuid()).First() + affixes3.OrderBy(s => Guid.NewGuid()).First();
+            var suffixedFirstName = shortFirstNames.OrderBy(s => Guid.NewGuid()).First() + affixes3.OrderBy(s => Guid.NewGuid()).First();
             suffixedFirstNames.Add(suffixedFirstName);
         }
 
         for (int i = 0; i < 16000; i++)
         {
-            var prefixedLastName = affixes5.OrderBy(s => Guid.NewGuid()).First() + lastNames.OrderBy(s => Guid.NewGuid()).First();
+            var prefixedLastName = affixes4.OrderBy(s => Guid.NewGuid()).First() + shortLastNames.OrderBy(s => Guid.NewGuid()).First();
             prefixedLastNames.Add(prefixedLastName);
         }
         
         for (int i = 0; i < 16000; i++)
         {
-            var suffixedLastName = lastNames.OrderBy(s => Guid.NewGuid()).First() + affixes4.OrderBy(s => Guid.NewGuid()).First();
+            var suffixedLastName = shortLastNames.OrderBy(s => Guid.NewGuid()).First() + affixes3.OrderBy(s => Guid.NewGuid()).First();
             suffixedLastNames.Add(suffixedLastName);
         }
         

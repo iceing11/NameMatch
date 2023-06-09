@@ -5,6 +5,7 @@ namespace NameMatch;
 public class Database
 {
     private List<Person> Record = new List<Person>();
+    private List<SoundexPair> SoundexRecord = new List<SoundexPair>();
 
     public Database(string recordPath)
     {
@@ -30,41 +31,102 @@ public class Database
                 persons.Add(p);
             }
         }
+        
+        CreateSoundexPairs(persons);
 
         return persons;
     }
 
-    public NameComparison GetClosestName(string name)
+    private void CreateSoundexPairs(List<Person> record)
     {
-        var cleanInput = Regex.Replace(name, @"\s+", "");
-        var inputSoundex = Soundex.GetSoundex(name.Split(' ')[0]) + Soundex.GetSoundex(name.Split(' ')[1]);
+        var soundexRecord = new List<SoundexPair>();
 
-        LevenshteinComparator quickenshteinComparator = new LevenshteinComparator();
-        CosineComparator cosineComparator = new CosineComparator();
+        foreach (var person in record)
+        {
+            SoundexPair soundexPair = new SoundexPair(person, Soundex.GetSoundex(person.GetFirstName()) + Soundex.GetSoundex(person.GetLastName()));
+            soundexRecord.Add(soundexPair);
+            //Console.WriteLine(soundexPair.GetSoundex());
+        }
 
-        var result = new NameComparison();
+        SoundexRecord = soundexRecord;
+    }
+
+    public List<NameComparison> GetClosestNames(string input, IComparator comparator, int maxOutputCount)
+    {
+        List<NameComparison> results = new List<NameComparison>();
+
+        var cleanInput = Regex.Replace(input, @"\s+", "");
 
         foreach (var person in Record)
         {
             var cleanName = person.GetFullName();
-            var soundex = Soundex.GetSoundex(person.GetFirstName()) + Soundex.GetSoundex(person.GetLastName());
-            
-            // Levenshtein Closeness
-            IComparator comparator = quickenshteinComparator;
-            var levenshteinCloseness = comparator.CompareSimilarity(cleanInput, cleanName);
-            // Soundex Levenshtein Closeness
-            var soundexLevenshteinCloseness = comparator.CompareSimilarity(inputSoundex, soundex);
-            // Cosine Similarity
-            comparator = cosineComparator;
-            var cosineSimilarity = comparator.CompareSimilarity(cleanInput, cleanName);
-            
-            // Similarity Score
-            var similarityScore = levenshteinCloseness * soundexLevenshteinCloseness * cosineSimilarity;
 
-            if (similarityScore > result.GetSimilarityScore()) result = new NameComparison(person.GetFullName(" "), levenshteinCloseness, cosineSimilarity, soundexLevenshteinCloseness, soundex, similarityScore);
+            var closeness = comparator.CompareSimilarity(cleanInput, cleanName);
+
+            if (results.Count == 0 || results.Count < maxOutputCount)
+            {
+                results.Add(new NameComparison(person.GetFullName(), Soundex.GetSoundex(person.GetFirstName()) + Soundex.GetSoundex(person.GetLastName()), closeness));
+                continue;
+            }
+
+            bool addToRanking = false;
+            
+            foreach (var result in results)
+            {
+                if (closeness > result.GetSimilarityScore())
+                {
+                    addToRanking = true;
+                }
+            }
+
+            if (addToRanking)
+            {
+                results.Add(new NameComparison(person.GetFullName(), Soundex.GetSoundex(person.GetFirstName()) + Soundex.GetSoundex(person.GetLastName()), closeness));
+                results = results.OrderByDescending(r => r.GetSimilarityScore()).ToList();
+
+                if (results.Count > maxOutputCount) results.RemoveAt(results.Count - 1);
+            }
         }
 
-        return result;
+        return results;
+    }
+    
+    public List<NameComparison> GetClosestSoundexes(string input, IComparator comparator, int maxOutputCount)
+    {
+        List<NameComparison> results = new List<NameComparison>();
+
+        var inputSoundex = Soundex.GetSoundex(input.Split(' ')[0]) + Soundex.GetSoundex(input.Split(' ')[1]);
+
+        foreach (var pair in SoundexRecord)
+        {
+            var closeness = comparator.CompareSimilarity(inputSoundex, pair.GetSoundex());
+
+            if (results.Count == 0 || results.Count < maxOutputCount)
+            {
+                results.Add(new NameComparison(pair.GetPerson().GetFullName(), pair.GetSoundex(), closeness));
+                continue;
+            }
+
+            bool addToRanking = false;
+            
+            foreach (var result in results)
+            {
+                if (closeness > result.GetSimilarityScore())
+                {
+                    addToRanking = true;
+                }
+            }
+
+            if (addToRanking)
+            {
+                results.Add(new NameComparison(pair.GetPerson().GetFullName(), pair.GetSoundex(), closeness));
+                results = results.OrderByDescending(r => r.GetSimilarityScore()).ToList();
+
+                if (results.Count > maxOutputCount) results.RemoveAt(results.Count - 1);
+            }
+        }
+
+        return results;
     }
 
     public Person? GetPersonByIndex(int index)

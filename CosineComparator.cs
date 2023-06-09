@@ -67,4 +67,9 @@ public class CosineComparator : IComparator
 
         return ngrams;
     }
+
+    public string GetName()
+    {
+        return "Cosine Similarity";
+    }
 }

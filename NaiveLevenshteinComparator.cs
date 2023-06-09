@@ -36,4 +36,9 @@ public class NaiveLevenshteinComparator : IComparator
 
         return (double)(maxLength - matrix[word1Length, word2Length]) / maxLength;
     }
+    
+    public string GetName()
+    {
+        return "Levenshtein Distance";
+    }
 }
