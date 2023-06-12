@@ -6,15 +6,18 @@ public class Database
 {
     private List<Person> Record = new List<Person>();
     private List<SoundexPair> SoundexRecord = new List<SoundexPair>();
+    private Soundex soundex = new Soundex();
+    private int _soundexCode;
 
-    public Database(string recordPath)
+    public Database(string recordPath, int soundexCode)
     {
-        Record = LoadRecords(recordPath);
+        Record = LoadRecords(recordPath, soundexCode);
     }
 
-    private List<Person> LoadRecords(string path)
+    private List<Person> LoadRecords(string path, int soundexCode)
     {
         var persons = new List<Person>();
+        _soundexCode = soundexCode;
         
         using (var reader = new StreamReader(path))  
         {
@@ -43,7 +46,7 @@ public class Database
 
         foreach (var person in record)
         {
-            SoundexPair soundexPair = new SoundexPair(person, Soundex.GetSoundex(person.GetFirstName()), Soundex.GetSoundex(person.GetLastName()));
+            SoundexPair soundexPair = new SoundexPair(person, soundex.GetSoundex(person.GetFirstName(), _soundexCode), soundex.GetSoundex(person.GetLastName(), _soundexCode));
             soundexRecord.Add(soundexPair);
             //Console.WriteLine(soundexPair.GetSoundex());
         }
@@ -68,7 +71,7 @@ public class Database
             
             if ((firstNameCloseness + lastNameCloseness) / 2 >= outputThreshold)
             {
-                results.Add(new NameComparison(person.GetFirstName(), person.GetLastName(), Soundex.GetSoundex(person.GetFirstName()), Soundex.GetSoundex(person.GetLastName()), firstNameCloseness, lastNameCloseness));
+                results.Add(new NameComparison(person.GetFirstName(), person.GetLastName(), soundex.GetSoundex(person.GetFirstName(), _soundexCode), soundex.GetSoundex(person.GetLastName(), _soundexCode), firstNameCloseness, lastNameCloseness));
             }
         }
 
@@ -80,8 +83,8 @@ public class Database
     {
         List<NameComparison> results = new List<NameComparison>();
         
-        var inputFirstNameSoundex = Soundex.GetSoundex(input.Split(' ')[0]);
-        var inputLastNameSoundex = Soundex.GetSoundex(input.Split(' ')[1]);
+        var inputFirstNameSoundex = soundex.GetSoundex(input.Split(' ')[0], _soundexCode);
+        var inputLastNameSoundex = soundex.GetSoundex(input.Split(' ')[1], _soundexCode);
 
         foreach (var soundexPair in SoundexRecord)
         {
