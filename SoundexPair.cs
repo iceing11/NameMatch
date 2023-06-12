@@ -3,12 +3,14 @@ namespace NameMatch;
 public class SoundexPair
 {
     private Person _person;
-    private string _soundex;
+    private string _firstNameSoundex;
+    private string _lastNameSoundex;
 
-    public SoundexPair(Person person, string soundex)
+    public SoundexPair(Person person, string firstNameSoundex, string lastNameSoundex)
     {
         _person = person;
-        _soundex = soundex;
+        _firstNameSoundex = firstNameSoundex;
+        _lastNameSoundex = lastNameSoundex;
     }
 
     public Person GetPerson()
@@ -16,8 +18,13 @@ public class SoundexPair
         return _person;
     }
 
-    public string GetSoundex()
+    public string GetFirstNameSoundex()
     {
-        return _soundex;
+        return _firstNameSoundex;
+    }
+    
+    public string GetLastNameSoundex()
+    {
+        return _lastNameSoundex;
     }
 }

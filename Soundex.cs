@@ -59,10 +59,12 @@ public static class Soundex
                 result += add;
             }
 
-            while (result.Length < 9)
+            /*
+            while (result.Length < 6)
             {
                 result += "0";
             }
+            */
 
             return result;
         }
