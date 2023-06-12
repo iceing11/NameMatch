@@ -35,6 +35,6 @@ public class NameComparison
 
     public override string ToString()
     {
-        return _fullName + " ( Similarity Score: " + Math.Round(_similarityScore, 6) + " ( " + _firstNameSimilarityScore + " / " + _lastNameSimilarityScore  +" ) " + " / Soundex Code: " + _firstNameSoundex + "/" + _lastNameSoundex + " )";
+        return _fullName + " ( Similarity Score: " + Math.Round(_similarityScore, 6) + " ( " + _firstNameSimilarityScore + " / " + _lastNameSimilarityScore  +" ) " + "/ Soundex Code: " + _firstNameSoundex + "/" + _lastNameSoundex + " )";
     }
 }

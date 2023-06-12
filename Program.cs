@@ -9,7 +9,7 @@ namespace NameMatch
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Soundex soundex = new Soundex();
 
-            string input = "ริษยา สุจินดา";
+            string input = "สัมฤทธิ์ เตชะวงศ์ธรรม";
             int soundexCode = 1; // 0: Udom, 1: Prayut-Somchai
             string inputSoundex = soundex.GetSoundex(input.Split(' ')[0], soundexCode) + "/" + soundex.GetSoundex(input.Split(' ')[1], soundexCode);
             var outputThreshold = 0.8;
